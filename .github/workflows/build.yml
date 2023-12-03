@@ -5,7 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install sbcl
+      - run: |
+          sudo apt-get update
+          sudo apt-get install sbcl
+          curl -O https://beta.quicklisp.org/quicklisp.lisp
+          sbcl --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --eval "(ql-util:without-prompting (ql:add-to-init-file))" --quit
       - uses: ankane/setup-postgres@v1
         with:
           database: pgvector_lisp_test
@@ -16,7 +20,4 @@ jobs:
           cd pgvector
           make
           sudo make install
-      - run: |
-          curl -O https://beta.quicklisp.org/quicklisp.lisp
-          sbcl --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --eval "(ql-util:without-prompting (ql:add-to-init-file))" --quit
       - run: sbcl --non-interactive --load example.lisp
