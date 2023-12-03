@@ -16,7 +16,7 @@ jobs:
           cd pgvector
           make
           sudo make install
-        run: |
+      - run: |
           curl -O https://beta.quicklisp.org/quicklisp.lisp
           sbcl --load quicklisp.lisp --eval "(quicklisp-quickstart:install)" --eval "(ql:add-to-init-file)" --quit
       - run: sbcl --non-interactive --load example.lisp
