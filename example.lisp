@@ -5,7 +5,7 @@
 
 (query "CREATE EXTENSION IF NOT EXISTS vector")
 
-(query "DROP TABLE IF EXISTS items")
+(query (:drop-table :if-exists 'items))
 
 (query "CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3))")
 
