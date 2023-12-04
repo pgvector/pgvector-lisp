@@ -107,5 +107,5 @@ To get started with development:
 git clone https://github.com/pgvector/pgvector-lisp.git
 cd pgvector-lisp
 createdb pgvector_lisp_test
-sbcl --non-interactive --load postmodern.lisp --load cl-dbi.lisp
+sbcl --noinform --non-interactive --load postmodern.lisp --load cl-dbi.lisp
 ```
