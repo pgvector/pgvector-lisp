@@ -2,7 +2,7 @@
 
 [pgvector](https://github.com/pgvector/pgvector) examples for Common Lisp
 
-Supports [Postmodern](https://github.com/marijnh/Postmodern)
+Supports [Postmodern](https://github.com/marijnh/Postmodern) and [CL-DBI](https://github.com/fukamachi/cl-dbi)
 
 [![Build Status](https://github.com/pgvector/pgvector-lisp/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/pgvector/pgvector-lisp/actions)
 
@@ -11,6 +11,7 @@ Supports [Postmodern](https://github.com/marijnh/Postmodern)
 Follow the instructions for your database library:
 
 - [Postmodern](#postmodern)
+- [CL-DBI](#cl-dbi)
 
 ## Postmodern
 
@@ -51,7 +52,45 @@ Add an approximate index
 
 Use `vector_ip_ops` for inner product and `vector_cosine_ops` for cosine distance
 
-See a [full example](example.lisp)
+See a [full example](postmodern.lisp)
+
+## CL-DBI
+
+Enable the extension
+
+```lisp
+(dbi:do-sql *db* "CREATE EXTENSION IF NOT EXISTS vector")
+```
+
+Create a table
+
+```lisp
+(dbi:do-sql *db* "CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3))")
+```
+
+Insert a vector
+
+```lisp
+(dbi:do-sql *db* "INSERT INTO items (embedding) VALUES (?)" (list "[1,1,1]"))
+```
+
+Get the nearest neighbors
+
+```lisp
+(dbi:fetch-all (dbi:execute (dbi:prepare *db* "SELECT * FROM items ORDER BY embedding <-> ? LIMIT 5") (list "[1,1,1]")))
+```
+
+Add an approximate index
+
+```lisp
+(dbi:do-sql *db* "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
+;; or
+(dbi:do-sql *db* "CREATE INDEX ON items USING hnsw (embedding vector_l2_ops)")
+```
+
+Use `vector_ip_ops` for inner product and `vector_cosine_ops` for cosine distance
+
+See a [full example](cl-dbi.lisp)
 
 ## Contributing
 
@@ -68,5 +107,5 @@ To get started with development:
 git clone https://github.com/pgvector/pgvector-lisp.git
 cd pgvector-lisp
 createdb pgvector_lisp_test
-sbcl --non-interactive --load example.lisp
+sbcl --non-interactive --load postmodern.lisp --load cl-dbi.lisp
 ```

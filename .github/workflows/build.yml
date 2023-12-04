@@ -20,4 +20,4 @@ jobs:
           cd pgvector
           make
           sudo make install
-      - run: sbcl --non-interactive --load example.lisp
+      - run: sbcl --non-interactive --load postmodern.lisp --load cl-dbi.lisp
