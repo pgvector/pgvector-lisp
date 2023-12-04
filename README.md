@@ -59,33 +59,33 @@ See a [full example](postmodern.lisp)
 Enable the extension
 
 ```lisp
-(dbi:do-sql *db* "CREATE EXTENSION IF NOT EXISTS vector")
+(dbi:do-sql *conn* "CREATE EXTENSION IF NOT EXISTS vector")
 ```
 
 Create a table
 
 ```lisp
-(dbi:do-sql *db* "CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3))")
+(dbi:do-sql *conn* "CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3))")
 ```
 
 Insert a vector
 
 ```lisp
-(dbi:do-sql *db* "INSERT INTO items (embedding) VALUES (?)" (list "[1,1,1]"))
+(dbi:do-sql *conn* "INSERT INTO items (embedding) VALUES (?)" (list "[1,1,1]"))
 ```
 
 Get the nearest neighbors
 
 ```lisp
-(dbi:fetch-all (dbi:execute (dbi:prepare *db* "SELECT * FROM items ORDER BY embedding <-> ? LIMIT 5") (list "[1,1,1]")))
+(dbi:fetch-all (dbi:execute (dbi:prepare *conn* "SELECT * FROM items ORDER BY embedding <-> ? LIMIT 5") (list "[1,1,1]")))
 ```
 
 Add an approximate index
 
 ```lisp
-(dbi:do-sql *db* "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
+(dbi:do-sql *conn* "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
 ;; or
-(dbi:do-sql *db* "CREATE INDEX ON items USING hnsw (embedding vector_l2_ops)")
+(dbi:do-sql *conn* "CREATE INDEX ON items USING hnsw (embedding vector_l2_ops)")
 ```
 
 Use `vector_ip_ops` for inner product and `vector_cosine_ops` for cosine distance
