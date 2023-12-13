@@ -36,8 +36,6 @@ Insert a vector
 Get the nearest neighbors
 
 ```lisp
-(register-sql-operators :2+-ary :<-> :<#> :<=>)
-
 (doquery (:limit (:order-by (:select 'id 'embedding :from 'items) (:<-> 'embedding "[1,1,1]")) 5) (id embedding)
     (format t "~A: ~A~%" id embedding))
 ```
