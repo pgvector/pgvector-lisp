@@ -4,7 +4,7 @@
 
 Supports [Postmodern](https://github.com/marijnh/Postmodern) and [CL-DBI](https://github.com/fukamachi/cl-dbi)
 
-[![Build Status](https://github.com/pgvector/pgvector-lisp/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/pgvector/pgvector-lisp/actions)
+[![Build Status](https://github.com/pgvector/pgvector-lisp/actions/workflows/build.yml/badge.svg)](https://github.com/pgvector/pgvector-lisp/actions)
 
 ## Getting Started
 
