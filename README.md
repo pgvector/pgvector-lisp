@@ -45,9 +45,9 @@ Get the nearest neighbors
 Add an approximate index
 
 ```lisp
-(query "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
-;; or
 (query "CREATE INDEX ON items USING hnsw (embedding vector_l2_ops)")
+;; or
+(query "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
 ```
 
 Use `vector_ip_ops` for inner product and `vector_cosine_ops` for cosine distance
@@ -83,9 +83,9 @@ Get the nearest neighbors
 Add an approximate index
 
 ```lisp
-(dbi:do-sql *conn* "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
-;; or
 (dbi:do-sql *conn* "CREATE INDEX ON items USING hnsw (embedding vector_l2_ops)")
+;; or
+(dbi:do-sql *conn* "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
 ```
 
 Use `vector_ip_ops` for inner product and `vector_cosine_ops` for cosine distance
