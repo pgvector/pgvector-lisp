@@ -18,7 +18,7 @@ Follow the instructions for your database library:
 Enable the extension
 
 ```lisp
-(query "CREATE EXTENSION IF NOT EXISTS vector")
+(load-extension "vector")
 ```
 
 Create a table
@@ -36,8 +36,6 @@ Insert a vector
 Get the nearest neighbors
 
 ```lisp
-(register-sql-operators :2+-ary :<-> :<#> :<=>)
-
 (doquery (:limit (:order-by (:select 'id 'embedding :from 'items) (:<-> 'embedding "[1,1,1]")) 5) (id embedding)
     (format t "~A: ~A~%" id embedding))
 ```
