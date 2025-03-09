@@ -43,7 +43,7 @@ Get the nearest neighbors
 Add an approximate index
 
 ```lisp
-(query "CREATE INDEX ON items USING hnsw (embedding vector_l2_ops)")
+(query (:create-index 'my-index :on 'items :using hnsw :fields embedding\ vector_l2_ops))
 ;; or
 (query "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
 ```
