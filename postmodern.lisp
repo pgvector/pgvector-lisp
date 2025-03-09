@@ -15,4 +15,6 @@
 (doquery (:limit (:order-by (:select 'id 'embedding :from 'items) (:<-> 'embedding "[1,1,1]")) 5) (id embedding)
     (format t "~A: ~A~%" id embedding))
 
-(query (:create-index 'my-index :on 'items :using hnsw :fields "embedding vector_l2_ops"))
+(query (:create-index 'my-hnsw-index :on 'items :using hnsw :fields "embedding vector_l2_ops"))
+;; or
+(query (:create-index 'my-ivfflat-index :on 'items :using ivfflat :fields "embedding vector_l2_ops" :with (:= 'lists 1)))

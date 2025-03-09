@@ -45,7 +45,7 @@ Add an approximate index
 ```lisp
 (query (:create-index 'my-index :on 'items :using hnsw :fields "embedding vector_l2_ops"))
 ;; or
-(query "CREATE INDEX ON items USING ivfflat (embedding vector_l2_ops) WITH (lists = 100)")
+(query (:create-index 'my-index :on 'items :using ivfflat :fields "embedding vector_l2_ops" :with (:= 'lists 100)))
 ```
 
 Use `vector_ip_ops` for inner product and `vector_cosine_ops` for cosine distance
