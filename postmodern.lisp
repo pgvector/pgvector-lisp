@@ -7,7 +7,7 @@
 
 (query (:drop-table :if-exists 'items))
 
-(query "CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3))")
+(query (:create-table 'items ((id :type bigserial :primary-key t) (embedding :type vector\(3\)))))
 
 (query (:insert-into 'items :set 'embedding "[1,1,1]"))
 (query (:insert-rows-into 'items :columns 'embedding :values '(("[2,2,2]") ("[1,1,2]"))))

@@ -24,7 +24,7 @@ Enable the extension
 Create a table
 
 ```lisp
-(query "CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3))")
+(query (:create-table 'items ((id :type bigserial :primary-key t) (embedding :type vector\(3\)))))
 ```
 
 Insert a vector
