@@ -13,6 +13,10 @@ Follow the instructions for your database library:
 - [Postmodern](#postmodern)
 - [CL-DBI](#cl-dbi)
 
+Or check out an example:
+
+- [Embeddings](examples/openai/example.lisp) with OpenAI
+
 ## Postmodern
 
 Enable the extension
@@ -106,4 +110,12 @@ git clone https://github.com/pgvector/pgvector-lisp.git
 cd pgvector-lisp
 createdb pgvector_lisp_test
 sbcl --noinform --non-interactive --load postmodern.lisp --load cl-dbi.lisp
+```
+
+To run an example:
+
+```sh
+cd examples/openai
+createdb pgvector_example
+sbcl --noinform --non-interactive --load example.lisp
 ```
