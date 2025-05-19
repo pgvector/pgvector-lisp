@@ -16,12 +16,15 @@
            (objects (cdr (assoc :data (json:decode-json-from-string response)))))
         (loop for v in objects collect (cdr (assoc :embedding v)))))
 
+(defun encode-vector (value)
+    (json:encode-json-to-string value))
+
 (defvar *input* (list "The dog is barking" "The cat is purring" "The bear is growling"))
 (defvar *embeddings* (embed *input*))
 (loop for content in *input* for embedding in *embeddings* do
-    (query (:insert-into 'documents :set 'content content 'embedding (json:encode-json-to-string embedding))))
+    (query (:insert-into 'documents :set 'content content 'embedding (encode-vector embedding))))
 
 (defvar *query* "forest")
 (defvar *embedding* (car (embed (list *query*))))
-(doquery (:limit (:order-by (:select 'content :from 'documents) (:<=> 'embedding (json:encode-json-to-string *embedding*))) 5) (content)
+(doquery (:limit (:order-by (:select 'content :from 'documents) (:<=> 'embedding (encode-vector *embedding*))) 5) (content)
     (format t "~A~%" content))
