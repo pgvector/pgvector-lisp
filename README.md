@@ -13,9 +13,10 @@ Follow the instructions for your database library:
 - [Postmodern](#postmodern)
 - [CL-DBI](#cl-dbi)
 
-Or check out an example:
+Or check out some examples:
 
 - [Embeddings](examples/openai/example.lisp) with OpenAI
+- [Binary embeddings](examples/cohere/example.lisp) with Cohere
 
 ## Postmodern
 
