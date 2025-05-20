@@ -6,6 +6,7 @@
 (load-extension "vector")
 (query (:drop-table :if-exists 'documents))
 (query (:create-table 'documents ((id :type bigserial :primary-key t) (content :type text) (embedding :type (vector 768)))))
+(query (:create-index 'my-index :on 'documents :using gin :fields (:to_tsvector "english" 'content)))
 
 (defun embed (input task-type)
     ; nomic-embed-text uses a task prefix
