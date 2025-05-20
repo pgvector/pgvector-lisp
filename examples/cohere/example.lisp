@@ -13,7 +13,7 @@
     (let* ((api-key (uiop:getenv "CO_API_KEY"))
            (url "https://api.cohere.com/v2/embed")
            (data `((texts . ,texts) (model . "embed-v4.0") (input_type . ,input-type) (embedding_types . (ubinary))))
-           (headers `(("Authorization" . ,(concatenate 'string "Bearer " api-key)) ("Content-Type" . "application/json")))
+           (headers `(("Authorization" . ,(format nil "Bearer ~A" api-key)) ("Content-Type" . "application/json")))
            (response (dex:post url :headers headers :content (json:encode-json-to-string data)))
            (embeddings (cdr (assoc :ubinary (cdr (assoc :embeddings (json:decode-json-from-string response)))))))
         (loop for v in embeddings collect (format nil "~{~8,'0b~}" v))))

@@ -11,7 +11,7 @@
 (defun embed (input task-type)
     ; nomic-embed-text uses a task prefix
     ; https://huggingface.co/nomic-ai/nomic-embed-text-v1.5
-    (let* ((input (loop for v in input collect (concatenate 'string task-type ": " v)))
+    (let* ((input (loop for v in input collect (format nil "~A: ~A" task-type v)))
            (url "http://localhost:11434/api/embed")
            (data `((input . ,input) (model . "nomic-embed-text")))
            (headers `(("Content-Type" . "application/json")))

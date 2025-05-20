@@ -11,7 +11,7 @@
     (let* ((api-key (uiop:getenv "OPENAI_API_KEY"))
            (url "https://api.openai.com/v1/embeddings")
            (data `((input . ,input) (model . "text-embedding-3-small")))
-           (headers `(("Authorization" . ,(concatenate 'string "Bearer " api-key)) ("Content-Type" . "application/json")))
+           (headers `(("Authorization" . ,(format nil "Bearer ~A" api-key)) ("Content-Type" . "application/json")))
            (response (dex:post url :headers headers :content (json:encode-json-to-string data)))
            (objects (cdr (assoc :data (json:decode-json-from-string response)))))
         (loop for v in objects collect (cdr (assoc :embedding v)))))
