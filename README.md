@@ -18,6 +18,7 @@ Or check out some examples:
 - [Embeddings](examples/openai/example.lisp) with OpenAI
 - [Binary embeddings](examples/cohere/example.lisp) with Cohere
 - [Hybrid search](examples/hybrid/example.lisp) with Ollama (Reciprocal Rank Fusion)
+- [Sparse search](examples/sparse/example.lisp) with Text Embeddings Inference
 
 ## Postmodern
 
