@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: |
           sudo apt-get update
           sudo apt-get install sbcl
@@ -16,7 +16,7 @@ jobs:
           dev-files: true
       - run: |
           cd /tmp
-          git clone --branch v0.8.1 https://github.com/pgvector/pgvector.git
+          git clone --branch v0.8.2 https://github.com/pgvector/pgvector.git
           cd pgvector
           make
           sudo make install
